@@ -1,0 +1,26 @@
+---
+version_proxy:
+  image: kemitchell/env-based-micro-proxy
+  environment:
+    - PORT=8080
+    - TARGET_1_HOST=
+    - TARGET_1_VERSION=1.x
+    - TARGET_2_HOST=
+    - TARGET_2_VERSION=2.x
+  ports:
+    - 80:8080
+  links:
+    - v1
+    - v2
+v1:
+  build: .
+  command: npm start
+  environment:
+    - NPM_TOKEN
+    - PORT=8080
+v2:
+  build: .
+  command: npm start
+  environment:
+    - NPM_TOKEN
+    - PORT=8080
